@@ -20,11 +20,20 @@ def find_executable(command: str) -> str | None:
             return None
         
     path_env = os.environ.get("PATH", "")
-    print(os.environ)
+    for d in path_env.split(":"):
+        if d == "":
+            d = "."
+        operation = os.path.join(d, command)
+        if os.access(operation, os.X_OK) and os.path.isfile(operation):
+            return operation
+    return None
 
 def run_external(argv: list[str]) -> None:
     command = argv[0]
     execute = find_executable(command)
+    if execute is None:
+        osprint(f"{command}: command not found :(")
+        return
 
 def main():
     while True:
