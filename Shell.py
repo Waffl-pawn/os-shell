@@ -125,7 +125,7 @@ def run_pipe(left_argv, right_argv):
     os.waitpid(pid1, 0)
     os.waitpid(pid2, 0)
 
-    
+
 def main():
     while True:
 
@@ -136,7 +136,7 @@ def main():
         line = sys.stdin.readline()
         if line == "":
             break
-        line = line.rstrip("\n")
+        line = line.strip()
 
         #detecting pipes
         if "|" in line:
